@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Messagerie sécurisée</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        h2 {
+            color: #1877f2;
+            text-align: center;
+        }
+        .message {
+            background-color: #e9ebee;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+        .message:hover {
+            transform: translateY(-5px);
+        }
+        .message p {
+            margin: 5px 0;
+        }
+        .sender {
+            font-weight: bold;
+            color: #1877f2;
+        }
+        .timestamp {
+            font-size: 0.8em;
+            color: #606770;
+        }
+        .content {
+            margin-top: 10px;
+        }
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .button {
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #166fe5;
+        }
+        .logout {
+            background-color: #dc3545;
+        }
+        .logout:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Messagerie sécurisée</h2>
+        {% for message in messages %}
+            <div class="message">
+                <p class="sender">De: {{ message.sender }}</p>
+                <p class="timestamp">{{ message.timestamp }}</p>
+                <p class="content">{{ message.content }}</p>
+            </div>
+        {% empty %}
+            <p>Aucun message pour le moment.</p>
+        {% endfor %}
+        <div class="actions">
+            <a href="{% url 'send_message' %}" class="button">Envoyer un message</a>
+            <a href="{% url 'logout' %}" class="button logout">Déconnexion</a>
+        </div>
+    </div>
+</body>
+</html>
